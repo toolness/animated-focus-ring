@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <style>
-.focus-ring.focus-ring-overlay {
+.focus-ring-overlay {
   background: rgba(0, 0, 255, 0.25);
   transition: top 0.25s, left 0.25s, width 0.25s, height 0.25s, opacity 0.125s;
 }
@@ -15,15 +15,16 @@
 }
 </style>
 <title>Animated focus ring</title>
+<a href="https://github.com/toolness/animated-focus-ring"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/652c5b9acfaddf3a9c326fa6bde407b87f7be0f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"></a>
 <h1>Animated focus ring</h1>
 <p>
-  This page builds upon the
-  <a href="#">WICG <code>:focus-ring</code> polyfill</a>
+  This page demonstrates a simple drop-in script that builds upon the
+  <a href="https://github.com/WICG/focus-ring">WICG <code>:focus-ring</code> polyfill</a>
   by adding support for animating the focus ring as it
-  moves around the page via a simple drop-in script.
+  moves around the page.
 </p>
 <p>
-  The behavior is based on the behavior of the focus
+  The behavior is based upon that of the focus
   ring on the <a href="http://webaim.org/">WebAIM</a> website.
 </p>
 <p>
@@ -31,6 +32,10 @@
   difficult time seeing where their focus ring has moved to
   when they press tab, which can be particularly hard if
   focusable elements on the page are spaced far apart.
+</p>
+<p>
+  For more details on how to use the script and customize
+  its behavior, see the <a href="https://github.com/toolness/animated-focus-ring">GitHub repository</a>.
 </p>
 <h2>Example focusable inputs</h2>
 <button type="button">Here is a button</button>
