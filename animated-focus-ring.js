@@ -1,4 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
+  if (!('transition' in document.body.style)) {
+    return;
+  }
+
   var DEFAULT_DURATION = '0.25s';
   var DIMENSIONS = ['top', 'left', 'width', 'height'];
   var overlay = null;
