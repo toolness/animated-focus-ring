@@ -1,3 +1,11 @@
+/**
+ * Animated focus ring
+ * https://github.com/toolness/animated-focus-ring
+ *
+ * Originally written by Atul Varma on March 25, 2017.
+ * Released into the public domain.
+ */
+
 document.addEventListener('DOMContentLoaded', function() {
   if (!('transition' in document.body.style &&
         'classList' in document.body)) {
