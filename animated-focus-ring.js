@@ -1,11 +1,13 @@
 document.addEventListener('DOMContentLoaded', function() {
-  if (!('transition' in document.body.style)) {
+  if (!('transition' in document.body.style &&
+        'classList' in document.body)) {
     return;
   }
 
   var DEFAULT_DURATION = '0.25s';
   var DIMENSIONS = ['top', 'left', 'width', 'height'];
   var overlay = null;
+
   var setOverlayPosition = function(overlay, rect) {
     var didChange = false;
     var currRect = overlay.getBoundingClientRect();
@@ -26,6 +28,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     return didChange;
   };
+
+  // Only set the overlay's CSS transition properties if
+  // they're not already defined for at least top/left/width/height.
   var setDefaultOverlayTransitionStyle = function (overlay) {
     var style = window.getComputedStyle(overlay);
     var isInTransition = function(prop) {
@@ -38,6 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }).join(', ');
     }
   };
+
   var createOverlay = function() {
     var overlay = document.createElement('div');
     document.body.appendChild(overlay);
