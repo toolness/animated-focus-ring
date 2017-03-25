@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var DEFAULT_DURATION = '0.25s';
   var DIMENSIONS = ['top', 'left', 'width', 'height'];
   var overlay = null;
-  var setOverlayPosition = function(rect) {
+  var setOverlayPosition = function(overlay, rect) {
     var didChange = false;
     var currRect = overlay.getBoundingClientRect();
 
@@ -21,27 +21,44 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     return didChange;
+  };
+  var setDefaultOverlayTransitionStyle = function (overlay) {
+    var style = window.getComputedStyle(overlay);
+    var isInTransition = function(prop) {
+      return (style.transitionProperty || '').match(new RegExp(prop));
+    };
+
+    if (!DIMENSIONS.every(isInTransition)) {
+      overlay.style.transition = DIMENSIONS.map(function(prop) {
+        return prop + ' ' + DEFAULT_DURATION;
+      }).join(', ');
+    }
+  };
+  var createOverlay = function() {
+    var overlay = document.createElement('div');
+    document.body.appendChild(overlay);
+    overlay.className = 'focus-ring focus-ring-overlay';
+    overlay.style.pointerEvents = 'none';
+    overlay.style.position = 'absolute';
+    overlay.style.opacity = '0';
+    setDefaultOverlayTransitionStyle(overlay);
+    overlay.addEventListener('transitionend', function(e) {
+      if (DIMENSIONS.indexOf(e.propertyName) !== -1) {
+        overlay.style.opacity = '0';
+      }
+    });
+    return overlay;
   }
 
   document.body.addEventListener('focus', function(e) {
+    var rect;
+
     if (e.target.classList.contains('focus-ring')) {
+      rect = e.target.getBoundingClientRect();
       if (!overlay) {
-        overlay = document.createElement('div');
-        document.body.appendChild(overlay);
-        overlay.className = 'focus-ring focus-ring-overlay';
-        overlay.style.pointerEvents = 'none';
-        overlay.style.transition = DIMENSIONS.map(function(prop) {
-          return prop + ' ' + DEFAULT_DURATION;
-        }).join(', ');
-        overlay.style.position = 'absolute';
-        overlay.addEventListener('transitionend', function(e) {
-          if (DIMENSIONS.indexOf(e.propertyName) !== -1) {
-            overlay.style.opacity = '0';
-          }
-        });
-        overlay.style.opacity = '0';
-        setOverlayPosition(e.target.getBoundingClientRect());
-      } else if (setOverlayPosition(e.target.getBoundingClientRect())) {
+        overlay = createOverlay();
+        setOverlayPosition(overlay, rect);
+      } else if (setOverlayPosition(overlay, rect)) {
         overlay.style.opacity = '1';
       }
     } else {
