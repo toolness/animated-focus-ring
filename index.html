@@ -16,10 +16,25 @@
 </style>
 <title>Animated focus ring</title>
 <h1>Animated focus ring</h1>
-<p>This is silly.</p>
-<script src="vendor/focus-ring.js"></script>
-<script src="animated-focus-ring.js"></script>
-<p>Hello <a href="#">there</a>.</p>
+<p>
+  This page builds upon the
+  <a href="#">WICG <code>:focus-ring</code> polyfill</a>
+  by adding support for animating the focus ring as it
+  moves around the page via a simple drop-in script.
+</p>
+<p>
+  The behavior is based on the behavior of the focus
+  ring on the <a href="http://webaim.org/">WebAIM</a> website.
+</p>
+<p>
+  This can be useful for keyboard users who might have a
+  difficult time seeing where their focus ring has moved to
+  when they press tab, which can be particularly hard if
+  focusable elements on the page are spaced far apart.
+</p>
+<h2>Example focusable inputs</h2>
 <button type="button">Here is a button</button>
 <label for="text-field">Here is a text field</label>
 <input type="text" id="text-field">
+<script src="vendor/focus-ring.js"></script>
+<script src="animated-focus-ring.js"></script>
